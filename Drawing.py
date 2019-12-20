@@ -1,0 +1,42 @@
+import cv2
+import numpy as np
+from tiah.vars import *
+
+def draw_header(img, img_id, color, msg=''):
+    imgW, imgH = img.shape[1], img.shape[0]
+    HEADER_height = int(img.shape[1] * 0.05)
+    mask = np.zeros((HEADER_height, imgW, 3), dtype=np.uint8)
+
+    mask[:, :, :] = color
+    msg = f'Frame: {str(img_id).rjust(4)}, {msg}'
+
+    header = cv2.addWeighted(
+        img[0:HEADER_height, 0:imgW, :], 0.4, mask, 0.6, 0)
+
+    txt_size, baseLine1 = cv2.getTextSize(msg, cv2.FONT_HERSHEY_DUPLEX, 2, 2)
+    p1_ = (10, 10 + txt_size[1] + 10)
+    img[0:HEADER_height, 0:imgW, :] = header[:, :, :]
+    cv2.putText(img, msg, p1_, cv2.FONT_HERSHEY_DUPLEX,
+                2, WHITE, 2)  # point is left-bottom
+
+
+def overlayfunc(img, bbox, ratio=0.9, alpha=0.7):
+    original = img.copy()
+    x1, y1, x2, y2 = bbox
+    cx, cy = int((x1 + x2) / 2), int((y1 + y2) / 2)
+    w = x2 - x1
+    h = y2 - y1
+    center = (cx, cy)
+    rad = max(w, h) * ratio
+
+    # cx,cy == center
+    # rad == max(w,h)
+
+    for i in range(7):
+        mask = np.zeros(original.shape, dtype=np.uint8)
+        cv2.circle(mask, center, int(rad) - i * 15, (255, 255, 255), -1)
+        mask = np.sum(mask, axis=2).astype(np.bool)
+        mask = np.logical_not(mask)
+        imgk = original.copy()
+        imgk[mask] = [255, 255, 255]
+        cv2.addWeighted(imgk, alpha, img, 1 - alpha, 0, img)

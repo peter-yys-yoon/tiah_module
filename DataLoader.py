@@ -3,15 +3,7 @@ from tiah_module.var import *
 import cv2
 from cv2 import FONT_HERSHEY_COMPLEX, VideoWriter_fourcc
 
-RED = (0, 0, 255)
-GREEN = (0, 255, 0)
-BLUE = (255, 0, 0)
-ORANGE = (255, 140, 0)
-YELLOW = (255, 255, 0)
-MAGENTA = (255, 0, 255)
-LIGHT_GREEN = (9, 249, 17)
-BALCK = (0, 0, 0)
-WHITE = (255, 255, 255)
+
 
 PLOT_COLOR = ['r', 'g', 'b', 'c', 'm', 'y', 'k', 'w']
 # PLOT_COLOR = ['go', 'bo','ro']
@@ -21,31 +13,11 @@ PLOT_MARKER = ['-',  # 0
                '--.',  # 3 d otted-line
                'o'  # 4 circle
                ]
-VIDEO_EXT_LIST = ['mp4', 'avi']
-COLOR_LIST = [RED, GREEN, BLUE, ORANGE, YELLOW, MAGENTA, LIGHT_GREEN, WHITE, BALCK]
 
 
 
-FONT_FACE = FONT_HERSHEY_COMPLEX
-THICKNESS = 2
-FONT_SCALE = 1
-FONT_THINKESS = 1
 
-FRAME_COUNT_LOC = (30, 50)
-FRAME_DIST_LOC = (990, 50)
-FRAME_STATUS_LOC = (410, 50)
 
-UPPER = 'upper'
-LOWER = 'lower'
-MEAN = 'mean'
-
-fourcc_avi = VideoWriter_fourcc('D', 'I', 'V', 'X')
-
-def get_properties(cap):
-    props = {'fps': int(cap.get(cv2.CAP_PROP_FPS)), 'fourcc': int(cap.get(cv2.CAP_PROP_FOURCC)),
-             'width': int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), 'height': int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)),
-             'length': int(cap.get(cv2.CAP_PROP_FRAME_COUNT))}
-    return props
 
 
 
@@ -96,31 +68,6 @@ def text_filled(frame, p1, label, color):
     cv2.putText(frame, label, p1, cv2.FONT_HERSHEY_DUPLEX, FONT_SCALE, WHITE, FONT_THINKESS)  # point is left-bottom
 
 
-
-def int2round(src):
-    """
-    returns rounded integer recursively
-    :param src:
-    :return:
-    """
-    if isinstance(src, float):
-        return int(round(src))
-
-    elif isinstance(src, tuple):
-        res = []
-        for i in range(len(src)):
-            res.append(int(round(src[i])))
-        return tuple(res)
-
-    elif isinstance(src, list):
-        res = []
-        for i in range(len(src)):
-            res.append(int2round(src[i]))
-        return res
-    elif isinstance(src, int):
-        return src
-    if isinstance(src, str):
-        return int(src)
 
 
 
