@@ -3,6 +3,23 @@ import argparse
 from tiah.vars import *
 from tiah_module.tools import *
 from tqdm import tqdm
+import os
+import platform
+import argparse
+
+PUMA = 'puma'
+OBAMA = 'obama'
+
+PATH_DATASET = '/home/peter/dataset'
+if platform.node() == PUMA:  #
+    PATH_DATASET = '/home/peter/dataset'
+    PATH_CONDA = '/home/peter/.conda/envs'
+
+else:
+    PATH_DATASET = '/home/peter/extra/dataset'
+    PATH_CONDA = '/home/peter/anaconda3/envs'
+    
+    
 
 def getopt():
     parser = argparse.ArgumentParser(description='PyTorch AlphaPose Training')
@@ -22,24 +39,19 @@ def getopt():
 
 
 def video_reading():
-
-
     args = getopt()
     WAIT = 25
-    path =''
-
-    cap = cv2.VideoCapture()
-    cap.open(path)
-    pps = get_properties(cap) # fps, fourcc, w, h , length
-
-
+    video_path =''
+    
+    "----------------------------------"
+    cap, atts = read_video(video_path)
+    framesize = get_framesize(cap)
+    
     if args.save_video:
         savepath = ''
-        framesize = ()
         writer = cv2.VideoWriter(savepath, FOURCC, 20, framesize)
 
-
-    name_desc = tqdm(range(pps[LENGTH]))
+    name_desc = tqdm(range(atts[LENGTH]))
     while 1:
         ret, frame = cap.read()
         if ret is False:

@@ -6,9 +6,9 @@ from tqdm import tqdm
 
 def get_parser():
     # parameter priority: command line > config > default
-    parser = argparse.ArgumentParser(description='Spatial Temporal Graph Convolution Network')
+    parser = argparse.ArgumentParser(description='Video trimming')
     parser.add_argument('--video', action='store', required=True)
-    parser.add_argument('--range', action='store', required=True)
+    parser.add_argument('--range', action='store', required=True, help='start:end  ex) mm:ss,mm:ss')
     parser.add_argument('--outdir', default='', action='store')
     return parser.parse_args()
 

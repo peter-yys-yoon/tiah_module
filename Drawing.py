@@ -20,6 +20,15 @@ def draw_header(img, img_id, color, msg=''):
                 2, WHITE, 2)  # point is left-bottom
 
 
+
+def text_filled(frame, p1, label, color):
+    txt_size, baseLine1 = cv2.getTextSize(label, cv2.FONT_HERSHEY_DUPLEX, FONT_SCALE, FONT_THINKESS)
+    p1_ = (p1[0] - 10, p1[1] + 10)
+    p2 = (p1[0] + txt_size[0] + 10, p1[1] - txt_size[1] - 10)
+    cv2.rectangle(frame, p1_, p2, color, -1)
+    cv2.putText(frame, label, p1, cv2.FONT_HERSHEY_DUPLEX, FONT_SCALE, WHITE, FONT_THINKESS)  # point is left-bottom
+
+
 def overlayfunc(img, bbox, ratio=0.9, alpha=0.7):
     original = img.copy()
     x1, y1, x2, y2 = bbox
@@ -40,3 +49,10 @@ def overlayfunc(img, bbox, ratio=0.9, alpha=0.7):
         imgk = original.copy()
         imgk[mask] = [255, 255, 255]
         cv2.addWeighted(imgk, alpha, img, 1 - alpha, 0, img)
+        
+def text_filled(frame, p1, label, color):
+    txt_size, baseLine1 = cv2.getTextSize(label, cv2.FONT_HERSHEY_DUPLEX, FONT_SCALE, FONT_THINKESS)
+    p1_ = (p1[0] - 10, p1[1] + 10)
+    p2 = (p1[0] + txt_size[0] + 10, p1[1] - txt_size[1] - 10)
+    cv2.rectangle(frame, p1_, p2, color, -1)
+    cv2.putText(frame, label, p1, cv2.FONT_HERSHEY_DUPLEX, FONT_SCALE, WHITE, FONT_THINKESS)  # point is left-bottom

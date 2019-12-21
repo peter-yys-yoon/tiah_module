@@ -5,7 +5,7 @@ import os
 
 def get_parser():
     # parameter priority: command line > config > default
-    parser = argparse.ArgumentParser(description='Spatial Temporal Graph Convolution Network')
+    parser = argparse.ArgumentParser(description='Printing video properties')
     parser.add_argument('--video', action='store', required=True)
     return parser.parse_args()
 

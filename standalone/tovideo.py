@@ -2,14 +2,10 @@ import os
 import argparse
 import cv2
 from tqdm import tqdm
+from vars import FOURCC
 
-fourcc_avi = cv2.VideoWriter_fourcc('D', 'I', 'V', 'X')
-
-def make_video(opt):
-    img_dir_path = opt.imgdir
-    outdir = opt.outdir
+def make_video(img_dir_path, outdir='', fps=30):
     flist = os.listdir(img_dir_path)
-    fps = opt.fps
     video_name = os.path.basename(img_dir_path)
 
     if len(outdir):
@@ -20,7 +16,7 @@ def make_video(opt):
     _img_shape = cv2.imread(os.path.join(img_dir_path, flist[0])).shape[0:2]
     img_shape = _img_shape[::-1]
     print('writing at ', output_path, ' img shape ', img_shape)
-    writer = cv2.VideoWriter(output_path, fourcc_avi, fps, img_shape)
+    writer = cv2.VideoWriter(output_path, FOURCC, fps, img_shape)
 
     length = len(flist)
     name_desc = tqdm(range(length))
@@ -39,4 +35,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    make_video(args)
+    make_video(args.indir, args.outdir, args.fps)
