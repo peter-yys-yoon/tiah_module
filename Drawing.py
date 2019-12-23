@@ -17,7 +17,7 @@ def draw_header(img, img_id, color, msg=''):
     p1_ = (10, 10 + txt_size[1] + 10)
     img[0:HEADER_height, 0:imgW, :] = header[:, :, :]
     cv2.putText(img, msg, p1_, cv2.FONT_HERSHEY_DUPLEX,
-                2, WHITE, 2)  # point is left-bottom
+                2, COLOR_WHITE, 2)  # point is left-bottom
 
 
 
