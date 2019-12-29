@@ -2,9 +2,15 @@ import cv2
 import numpy as np
 from tiah.vars import *
 
-def draw_header(img, img_id, color, msg=''):
+def draw_header(img, img_id, color, msg='', height= 0.05, scale=2, thick=2):
+    txt_size, baseLine1 = cv2.getTextSize(msg, cv2.FONT_HERSHEY_DUPLEX, scale, thick)
+    p1_ = (10, 10 + txt_size[1] + 10)
+
     imgW, imgH = img.shape[1], img.shape[0]
-    HEADER_height = int(img.shape[1] * 0.05)
+    HEADER_height = int(10 + txt_size[1]+15)
+    # HEADER_height = int(img.shape[1] * height)
+
+
     mask = np.zeros((HEADER_height, imgW, 3), dtype=np.uint8)
 
     mask[:, :, :] = color
@@ -13,11 +19,9 @@ def draw_header(img, img_id, color, msg=''):
     header = cv2.addWeighted(
         img[0:HEADER_height, 0:imgW, :], 0.4, mask, 0.6, 0)
 
-    txt_size, baseLine1 = cv2.getTextSize(msg, cv2.FONT_HERSHEY_DUPLEX, 2, 2)
-    p1_ = (10, 10 + txt_size[1] + 10)
+
     img[0:HEADER_height, 0:imgW, :] = header[:, :, :]
-    cv2.putText(img, msg, p1_, cv2.FONT_HERSHEY_DUPLEX,
-                2, COLOR_WHITE, 2)  # point is left-bottom
+    cv2.putText(img, msg, p1_, cv2.FONT_HERSHEY_DUPLEX, scale, COLOR_WHITE, thick)  # point is left-bottom
 
 
 

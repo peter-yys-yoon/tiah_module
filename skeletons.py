@@ -82,7 +82,7 @@ def video_reading():
     
     if args.save_video:
         savepath = ''
-        writer = cv2.VideoWriter(savepath, FOURCC, 20, framesize)
+        writer = cv2.VideoWriter(savepath, XVID, 20, framesize)
 
     name_desc = tqdm(range(atts[LENGTH]))
     while 1:

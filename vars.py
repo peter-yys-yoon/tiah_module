@@ -6,7 +6,7 @@ import cv2
 
 "----------------------------- VIDEO -----------------------------"
 XVID = cv2.VideoWriter_fourcc(*'XVID')
-
+H264 = cv2.VideoWriter_fourcc('H', '2', '6', '4')
 VIDEO_EXT_LIST = ['mp4', 'avi']
 
 "----------------------------- FONT -----------------------------"
@@ -36,12 +36,15 @@ COLOR_RED = (0, 0, 255)
 COLOR_GREEN = (0, 255, 0)
 COLOR_BLUE = (255, 0, 0)
 COLOR_ORANGE = (0, 129, 255)
+COLOR_ORANGE = (0, 162, 255)
 COLOR_YELLOW = (15, 217, 255)
+# COLOR_YELLOW = (0, 255, 255)
 COLOR_MAGENTA = (255, 0, 255)
 COLOR_LIGHT_GREEN = (9, 249, 17)
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
-
+COLOR_CYAN = (255, 255, 0)
+COLOR_PURPLE = (255, 0, 255)
 
 
 "----------------------------- COLOR  -----------------------------"

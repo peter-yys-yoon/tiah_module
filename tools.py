@@ -1,7 +1,7 @@
 
 
 import cv2
-
+import os
 
 def int2round(src):
     """
@@ -44,7 +44,7 @@ def read_video(path, isprint= False):
     :param fname: video file name
     :return: image list
     """
-    assert os.path.exists(path)
+    assert os.path.exists(path), 'Failed to open ' + path
     cap = cv2.VideoCapture()
     cap.open(path)
 
