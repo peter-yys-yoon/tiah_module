@@ -7,23 +7,28 @@ import os
 import platform
 import argparse
 
-PUMA = 'puma'
-OBAMA = 'obama'
 
-PATH_DATASET = '/home/peter/dataset'
-if platform.node() == PUMA:  #
-    PATH_DATASET = '/home/peter/dataset'
-    PATH_CONDA = '/home/peter/.conda/envs'
-
-else:
-    PATH_DATASET = '/home/peter/extra/dataset'
-    PATH_CONDA = '/home/peter/anaconda3/envs'
     
 def runner():
+
+    PUMA = 'puma'
+    OBAMA = 'obama'
+
+    PATH_DATASET = '/home/peter/dataset'
+    if platform.node() == PUMA:  #
+        PATH_DATASET = '/home/peter/dataset'
+        PATH_CONDA = '/home/peter/.conda/envs'
+
+    else:
+        PATH_DATASET = '/home/peter/workspace/dataset'
+        PATH_CONDA = '/home/peter/anaconda3/envs'
+
+
+
     "---------------------HERE-------------------------"
-    DATAPATH = '/home/peter/extra/dataset/gist/elevator'
+    DATAPATH = '/home/peter/workspace/dataset/gist/elevator'
     ENV = 'elev'
-    PROJECTPATH = '/home/peter/extra/Workspace/code/elev'
+    PROJECTPATH = '/home/peter/workspace/code/elev'
     PYNAME = 'yolotest.py'
     OUTPATH = os.path.join(PROJECTPATH, 'output/yolo')
     "---------------------------------------------------"

@@ -40,10 +40,9 @@ def trim(opt):
     props = get_properties(cap)
     fps = props['fps']
     s, e = range_count(opt.range, fps)
-    # fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-    fourcc = cv2.VideoWriter_fourcc('H', '2', '6', '4')
-    # fourcc = VideoWriter_fourcc(*'MP4V')
 
+    #fourcc = cv2.VideoWriter_fourcc('H', '2', '6', '4')
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
     writer = cv2.VideoWriter(out_path, fourcc, props['fps'], (props['width'], props['height']))
 
     print(out_path, props, s, '~', e, )

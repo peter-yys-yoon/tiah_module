@@ -2,11 +2,11 @@ import cv2
 
 "--------------------------------"
 # PROJECT_PATH = '/home/peter/extra/Workspace/codes/ictlight'  # OBAMA
-
+PATH_ROOT_DATASET = '/home/peter/workspace/dataset'
 
 "----------------------------- VIDEO -----------------------------"
-XVID = cv2.VideoWriter_fourcc(*'XVID')
-H264 = cv2.VideoWriter_fourcc('H', '2', '6', '4')
+CODEC_XVID = cv2.VideoWriter_fourcc(*'XVID')
+CODEC_H264 = cv2.VideoWriter_fourcc('H', '2', '6', '4')
 VIDEO_EXT_LIST = ['mp4', 'avi']
 
 "----------------------------- FONT -----------------------------"

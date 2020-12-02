@@ -14,14 +14,18 @@ def draw_header(img, img_id, color, msg='', height= 0.05, scale=2, thick=2):
     mask = np.zeros((HEADER_height, imgW, 3), dtype=np.uint8)
 
     mask[:, :, :] = color
-    msg = f'Frame: {str(img_id).rjust(4)}, {msg}'
+    if len(msg):
+        # vis_msg = f'Frame: {str(img_id).rjust(4)} {msg}'
+        vis_msg = msg
+    else:
+        vis_msg = f'Frame: {str(img_id).rjust(4)}'
 
     header = cv2.addWeighted(
         img[0:HEADER_height, 0:imgW, :], 0.4, mask, 0.6, 0)
 
 
     img[0:HEADER_height, 0:imgW, :] = header[:, :, :]
-    cv2.putText(img, msg, p1_, cv2.FONT_HERSHEY_DUPLEX, scale, COLOR_WHITE, thick)  # point is left-bottom
+    cv2.putText(img, vis_msg, p1_, cv2.FONT_HERSHEY_DUPLEX, scale, COLOR_WHITE, thick)  # point is left-bottom
 
 
 
