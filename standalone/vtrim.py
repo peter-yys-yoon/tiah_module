@@ -10,6 +10,8 @@ def get_parser():
     parser.add_argument('--video', action='store', required=True)
     parser.add_argument('--range', action='store', required=True, help='start:end  ex) mm:ss,mm:ss')
     parser.add_argument('--outdir', default='', action='store')
+    parser.add_argument('--res', default='', action='store', help='modify resolution ex) half' )
+
     return parser.parse_args()
 
 
@@ -41,9 +43,15 @@ def trim(opt):
     fps = props['fps']
     s, e = range_count(opt.range, fps)
 
+    w,h = props['width'],props['height']
+    if opt.res == 'half':
+        w = int(w/2)
+        h = int(h/2)
+
     #fourcc = cv2.VideoWriter_fourcc('H', '2', '6', '4')
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    writer = cv2.VideoWriter(out_path, fourcc, props['fps'], (props['width'], props['height']))
+    #writer = cv2.VideoWriter(out_path, fourcc, props['fps'], (props['width'], props['height']))
+    writer = cv2.VideoWriter(out_path, fourcc, props['fps'], (w,h))
 
     print(out_path, props, s, '~', e, )
     name_desc = tqdm(range(e))
@@ -57,6 +65,7 @@ def trim(opt):
             break
 
         if s < count < e:
+            frame = cv2.resize(frame,(w,h))
             writer.write(frame)
         count += 1
 
